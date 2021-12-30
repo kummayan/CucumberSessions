@@ -1,0 +1,15 @@
+Runners
+
+CLI:io.cucumber.core.cli.Main
+Maven exec
+Scenarios in Parallel
+
+Junit:Runner class
+Supports Annonated Method
+Features in parallel
+
+
+TestNG:Runner Class
+Supports Annonated method
+Scenarios in parallel
+
