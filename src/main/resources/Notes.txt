@@ -12,4 +12,97 @@ Features in parallel
 TestNG:Runner Class
 Supports Annonated method
 Scenarios in parallel
+----------------------------------------------------
+Hooks
+We have 3 diiferent types of annotation
+1. @BeforeAll--->It is run once before a Scenario
+2. @BeforeStep---> It is ran before each scenario is run
+3. @Before-------->It is run Before each Step
+
+
+Ordered
+--------
+
+Suppose there are 2 Before hooks and 2 after hooks that we want to run in ordered form
+
+@Before(order=0)
+@Before(order=1)
+
+Hook that has order as 0 will be executed first and the hook with order=1 will be excuted after that
+
+Suppose there are 2 After hooks and 2 after hooks that we want to run in ordered form
+
+
+@After(order=1)
+@After(order=0)
+
+Hooks with order 1 will be executed and hooks with order 0 will be executed next
+
+We can have tagged hooks as well like
+
+@Before("@scenario1")-> Which will run before scenario that is tagged with @scenario1
+@Before("@scenario2")-> Which will run before scenario that is tagged with @scenario2
+
+Note:- But if any of the hook is not tagged with any of the scenario then that hook will
+        be executed before every scenario irrespective of any of the tagging
+
+---------------------------------------------------------------------------------
+
+Tags
+Tags can be applied at different  different places
+
+1. At Feature level
+2. At Rule level
+3 At Scenario level
+4. At Example Level
+
+Tags Inheritance
+---------------
+Tags applied at Feature Level will be inherited to all places i,e Rule Level, Scenario Level, At Example Level
+Tags applied at Rule level will be inherited to the Scenario which are under that rule and at example level of that scenarios
+
+Tags at Scenario Level will be inherited to the Example Level
+
+Tags Expressions
+----------------
+
+1. @smoke or @sanity
+Every scenario will be executed which is having scenario tagged as either smoke or snaity
+
+2. @smoke and @sanity
+Every scenario will get executed which is having scenario tagged as smoke and sanity both
+
+2. @smoke and not @sanity
+All the scenarios will be executed which is having scenario tagged as smoke  and those scenarios will be rejected which is having
+tags as sanity
+
+3. not @sanity
+Every scenario will be executed except the scenario tagged as @sanity
+
+----------------------------------------------------------------------------------------------------------------
+
+Framework Anti Pattern
+---------------------
+1. Feature Coupled Step Definations
+We should not have single step defination class for every feature. in that case conflict may arise
+Suppose there are 2 developers and each developer is working on different different feature lets say cart feature and checkout feature
+and if we will have same step definations class for both the feature then there could be possibility of the conflicts
+Hence we should not couple step definations
+
+2. Static Keyword in Step definations
+
+If we will keep driver as static then it could create a problem in Parallel execution Also we should not place any variable as Static
+in Step defination. If we are doing so then we sharing the state between those
+
+3. Duplicate UI Element Definations
+
+If we will use the UI Element in the step defination file then that UI element has to be repeated in other Step definations
+So to avoid this Page Object Model comes into picture which says that we should have object element separated in different pages
+
+
+
+
+
+
+
 
